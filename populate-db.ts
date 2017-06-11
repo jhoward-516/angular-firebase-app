@@ -12,7 +12,6 @@ const coursesRef = database().ref('courses');
 const lessonsRef = database().ref('lessons');
 
 
-
 dbData.courses.forEach( course => {
 
   console.log('adding course', course.url);
