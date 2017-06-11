@@ -2,6 +2,13 @@
   margin-left: 40px;
 }
 
+.top-menu li:first-child a.menu-active {
+  padding-right: 12px;
+}
+
+.top-menu a.menu-active:nth-child(2) {
+  padding-left: 12px;
+}
 header {
   height: 55px;
 }
