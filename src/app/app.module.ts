@@ -5,6 +5,11 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/observable/combineLatest';
+import 'rxjs/add/observable/of';
+
 
 import { AppComponent } from './app.component';
 

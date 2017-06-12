@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {CoursesService} from "../shared/model/courses.service";
+import {ActivatedRoute} from "@angular/router";
+import {Observable} from "rxjs/Observable";
+import {Lesson} from "../shared/model/lesson";
+import {Course} from "../shared/model/course";
 
 @Component({
   selector: 'app-course-detail',
@@ -7,9 +12,46 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseDetailComponent implements OnInit {
 
-  constructor() { }
+  course$: Observable<Course>;
+  lessons: Lesson[];
+  courseUrl: string;
+
+  constructor(
+    private route: ActivatedRoute,
+    private coursesService: CoursesService) { }
 
   ngOnInit() {
+
+    this.courseUrl = this.route.snapshot.params['id'];
+
+    this.course$ = this.coursesService.findCourseByUrl(this.courseUrl);
+
+    const lessons$ = this.coursesService.loadFirstLessonsPage(this.courseUrl, 3);
+
+    lessons$.subscribe(lessons => this.lessons = lessons);
   }
 
+  next() {
+
+    this.coursesService.loadNextPage(
+      this.courseUrl,
+      this.lessons[this.lessons.length - 1].$key,
+      3
+    )
+      .subscribe(lessons => this.lessons = lessons);
+
+
+  }
+
+
+  previous() {
+
+    this.coursesService.loadPreviousPage(
+      this.courseUrl,
+      this.lessons[0].$key,
+      3
+    )
+      .subscribe(lessons => this.lessons = lessons);
+
+  }
 }
