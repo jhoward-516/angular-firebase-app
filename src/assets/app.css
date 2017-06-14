@@ -96,6 +96,7 @@ form label {
 
 form fieldset {
     margin-bottom: 20px;
+    width: 350px;
 }
 
 form textarea {
